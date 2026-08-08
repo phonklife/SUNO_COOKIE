@@ -1,15 +1,46 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code when working with code in this repository.
 
-## Current State
+## Project Overview
 
-This repository (`phonklife/suno_cookie`) is currently **empty** — it contains no source code, README, package manifest, or configuration files of any kind, only this file.
+`SUNO_COOKIE` is a small Node.js/TypeScript toolkit for validating a user-supplied Suno session cookie without exposing the secret. It is intentionally local-first and does not scrape browser cookie stores or capture other users' sessions.
 
-A previous version of this CLAUDE.md described a "Suno API Client Library" with a dual Python/TypeScript package layout, pytest/mypy/npm commands, and specific code conventions. None of that reflects anything actually present in this repo — it was speculative content written without any code to inspect, so it has been removed to avoid misleading future sessions.
+## Project Structure
 
-## Guidance for Future Sessions
+```text
+src/config.ts       environment validation
+src/redact.ts       secret redaction helper
+src/index.ts        CLI entry point
+test/redact.test.ts tests for config and redaction
+README.md           usage and security notes
+.env.example        placeholder environment configuration
+```
 
-- Do not assume the Python/TypeScript dual-client structure described in earlier versions of this file exists — verify actual repository contents (`ls`, `git log`) before relying on any prior documentation.
-- Once real source files, a README, or package manifests (`package.json`, `pyproject.toml`, etc.) are added to this repo, this file should be regenerated from those actual files — commands, architecture notes, and conventions should be derived from what's really there, not guessed from the repo name.
-- If you are the first to add real code here, please replace this section with genuine project documentation (build/test/lint commands, architecture overview) once the codebase exists.
+## Development Commands
+
+```bash
+npm install
+npm run check
+npm run build
+npm test
+npm start
+```
+
+Node.js 20+ is required.
+
+## Security Rules
+
+- Never commit a real `SUNO_COOKIE` value.
+- Never print, log, snapshot, or include the full cookie in errors.
+- Keep `.env` and other local secret files ignored by Git.
+- Do not add automatic browser-cookie extraction or credential/session harvesting.
+- Any future HTTP adapter must use only a session explicitly supplied by the account owner and should use timeouts, narrow operations, and redacted logging.
+
+## Code Conventions
+
+- TypeScript strict mode is enabled.
+- Use ESM imports compatible with `NodeNext`.
+- Prefer small pure helpers that are easy to test.
+- Add tests for validation, redaction, and any future request-building logic.
+- Keep runtime dependencies minimal unless a dependency clearly improves correctness or security.
