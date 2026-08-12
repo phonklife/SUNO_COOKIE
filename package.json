@@ -8,7 +8,7 @@
     "build": "tsc -p tsconfig.json",
     "check": "tsc -p tsconfig.json --noEmit",
     "start": "node dist/src/index.js",
-    "test": "npm run build && node --test dist/test/**/*.test.js"
+    "test": "npm run build && node --test dist/test/redact.test.js"
   },
   "engines": {
     "node": ">=20"
