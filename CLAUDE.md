@@ -1,43 +1,15 @@
-# SUNO_COOKIE // R3 ERA — THE EMPTY STATE MANIFESTO
+# CLAUDE.md
 
-> *„Repo stoi puste jak betonowy hangar przed pierwszym bassem.”*
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
----
+## Current State
 
-## I. UTWÓR / POEZJA ARCHITEKTONICZNA: STAN ZERO
+This repository (`phonklife/suno_cookie`) is currently **empty** — it contains no source code, README, package manifest, or configuration files of any kind, only this file.
 
-(Intro: Niskie mruczenie generatora, szum analogowej taśmy, absolutna cisza wirtualnego hangaru)
+A previous version of this CLAUDE.md described a "Suno API Client Library" with a dual Python/TypeScript package layout, pytest/mypy/npm commands, and specific code conventions. None of that reflects anything actually present in this repo — it was speculative content written without any code to inspect, so it has been removed to avoid misleading future sessions.
 
-Beton i cisza, pustka w sieci,
-Żaden algorytm jeszcze nie świeci.
-Zero kodu, zero struktur, złudzeń mur,
-W kadrze tylko cień, w hangarze tylko chłód.
+## Guidance for Future Sessions
 
-Czekamy na ruch, na twardy plik,
-Zanim zakwitnie pierwszy kick.
-Żadne domysły, żadna fikcja,
-Tu twarda rządzi jurysdykcja.
-
-Reguła R3, żelazny mur:
-Agent nie zgaduje. Nie buduje bzdur.
-Czeka na surowiec, na prawdy krzyk,
-Jak subwoofer na pierwszy, potężny dyk.
-
----
-
-## II. SPECYFIKACJA TECHNICZNA I OPERACYJNA (DOCUMENT VALUE)
-
-### 1. Parametry Projektowe
-- **Projekt:** `SUNO_COOKIE`
-- **Era:** `R3` (Pre-Phase / Empty State)
-- **Środowisko:** Czysty rejestr, brak wstępnych zależności, baza zerowa.
-
-### 2. Żelazna Zasada R3 (Protocol R3)
-- **Brak Spekulacji:** Agent systemowy nie generuje kodu "na zapas" ani nie tworzy domyślnych struktur bez wyraźnego, fizycznego pliku źródłowego od użytkownika.
-- **Stan Hangaru (Empty State):** Repozytorium traktowane jest jako poligon czystej intencji. Każdy plik musi zostać dostarczony realnie.
-- **Przepływ (Flow):** `WAIT FOR REAL FILES` — zatrzymanie autonomicznej generacji do momentu dostarczenia wsadu właściwego.
-
-### 3. Instrukcja Inicjalizacji
-1. Nie dopisuj kodu spekulatywnego.
-2. Czekaj na wgranie plików bazy lub struktury audio/kodowej.
-3. Trzymaj linię fabrykacji w stanie ciszy roboczej.
+- Do not assume the Python/TypeScript dual-client structure described in earlier versions of this file exists — verify actual repository contents (`ls`, `git log`) before relying on any prior documentation.
+- Once real source files, a README, or package manifests (`package.json`, `pyproject.toml`, etc.) are added to this repo, this file should be regenerated from those actual files — commands, architecture notes, and conventions should be derived from what's really there, not guessed from the repo name.
+- If you are the first to add real code here, please replace this section with genuine project documentation (build/test/lint commands, architecture overview) once the codebase exists.
