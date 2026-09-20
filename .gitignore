@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+
+# Node
+node_modules/
+node/dist/
+npm-debug.log*
+
+# Editors / OS
+.DS_Store
+.vscode/
+.idea/
