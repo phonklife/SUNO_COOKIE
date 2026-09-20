@@ -1,0 +1,20 @@
+{
+  "name": "suno-cookie",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A small, local-first toolkit for validating Suno session configuration without exposing secrets.",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "start": "node dist/src/index.js",
+    "test": "npm run build && node --test dist/test/redact.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  }
+}
