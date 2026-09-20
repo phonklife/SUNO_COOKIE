@@ -1,0 +1,30 @@
+{
+  "name": "@suno-cookie/suno-client",
+  "version": "0.1.0",
+  "description": "TypeScript client library for a self-hosted suno-api (gcui-art/suno-api) server",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "jest",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src tests --ext .ts"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.0"
+  }
+}
