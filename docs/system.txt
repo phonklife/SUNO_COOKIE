@@ -1,0 +1,128 @@
+SYSTEM — Repo + Copilot Cloud Agent + Workflow
+(ultra‑minimal, modularny, gotowy do wrzucenia do repo)
+
+1) Cel
+Połączyć strukturę repo, konfiguracje Copilot Cloud Agent oraz praktyczny workflow pracy (lokalnie + GitHub).
+Jeden plik‑rdzeń, zwięzły, możliwy do rozbicia później na mniejsze moduły.
+
+2) Struktura repo (zalecana)
+/.github/
+  /copilot/agents/        # definicje agentów Cloud (YAML)
+  /workflows/             # workflow GitHub Actions uruchamiające agentów
+/docs/                    # dokumentacja
+  system.txt              # (ten plik)
+/src/                     # kod źródłowy (ts/py)
+  ...
+/music/
+/presets/
+/api/
+/web/
+
+3) Pliki agenta (co musi zawierać każdy agent)
+.github/copilot/agents/<agent-name>.yml
+  - opis (co może robić)
+  - scope (katalogi/ścieżki, które może edytować)
+  - zasady Git (branch naming, commit message templates, nie modyfikować main)
+  - ograniczenia (np. max files, skip large binaries)
+
+4) Cykl działania agenta (koncept)
+@github-copilot plan
+  - analiza repo i scope
+  - propozycja zmian (plan) — nie edytuje plików
+
+@github-copilot apply
+  - tworzy branch roboczy
+  - wykonuje zmiany zgodnie z planem
+  - git add → git commit -m "<msg>" → git push origin <branch>
+  - otwiera PR z opisem i checklistą
+
+@github-copilot fix
+  - poprawki w PR (po review/CI failures)
+
+@github-copilot update <target>
+  - synchronizacja/aktualizacja zasobów (np. presets)
+
+Zasady bezpieczeństwa:
+  - Agent nigdy nie pracuje bezpośrednio na main
+  - Zawsze tworzy gałąź i PR
+  - Operacje Git są ograniczone do scope zdefiniowanego w YAML
+
+5) Mapowanie komend Git → zachowanie agenta
+git status   → używane przez agent przed plan/apply (stanu repo)
+git add      → agent używa w apply do stagingu
+git commit   → agent generuje commit z sensownym komunikatem
+git push     → agent wypycha branch do origin
+git pull     → agent synchronizuje branch, jeśli potrzebne
+git clone    → użytkownik lokalnie
+git init     → tylko przy tworzeniu nowego repo lokalnie (agent nie inicjuje)
+
+6) Praktyczny workflow (krok po kroku)
+Lokalnie:
+  git clone <url>
+  pracujesz lokalnie (edytujesz, testujesz)
+  git add .
+  git commit -m "krótki opis"
+  git push origin <branch>  (lub main jeśli workflow tego wymaga)
+
+Na GitHub (uruchamiasz agenta):
+  # wygeneruj lub wywołaj plan
+  @github-copilot plan
+  # sprawdź plan, zaakceptuj
+  @github-copilot apply
+  # agent:
+  # - tworzy branch
+  # - wykonuje zmiany
+  # - robi commit, push
+  # - otwiera PR
+
+Pełny przykład (szybki):
+  # 1. lokalne zmiany
+  git status
+  git add .
+  git commit -m "Refactor api routes"
+  git push origin main
+
+  # 2. w komentarzu/pr:
+  @github-copilot plan
+  @github-copilot apply
+
+7) Przykładowy minimalny szablon commit message
+  <typ>(scope): krótki opis
+  (opcjonalnie)
+  Body: krótki kontekst i odniesienie do task/issue.
+
+8) Konfiguracja minimalnego agenta (schemat — zawartość pliku YAML)
+  name: studio-forma-agent
+  description: "Agent do aktualizacji presetów i drobnych poprawek"
+  scope:
+    - "presets/"
+    - "api/routes/"
+  rules:
+    - do_not_edit: ["music/raw/*", "binaries/"]
+    - max_files_change: 20
+  git:
+    branch_prefix: "copilot/"
+    commit_template: "[copilot] {summary}"
+    create_pr: true
+
+(Uwaga: powyższy blok to schemat — dopasuj do polityk i CI repo)
+
+9) Integracja dokumentacyjna
+  - W /docs/ trzy opcje: zostawić ten plik jako rdzeń, lub rozdzielić na:
+    docs/system-structure.md
+    docs/copilot-agent.md
+    docs/workflow.md
+  - Linkuj do przykładowych agent YAML i do workflowów w .github/workflows
+
+10) Checklist przed uruchomieniem agenta
+  - Repo zawiera .github/copilot/agents/*.yml
+  - Scope agenta jest ograniczony i przetestowany
+  - CI uruchamia testy dla PRów utworzonych przez agenta
+  - Komunikacja: wiadomość w PR informuje reviewerów, że PR wygenerował Copilot
+
+11) Szybkie rekomendacje
+  - Używaj krótkich, czytelnych commit message templates
+  - Wymuszaj review i CI na PRach tworzonych przez agentów
+  - Monitoruj i ogranicz uprawnienia agenta do tylko niezbędnych katalogów
+
+Koniec.
