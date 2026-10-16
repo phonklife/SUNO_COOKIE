@@ -1,0 +1,16 @@
+# SUNO_COOKIE // ochrona sekretów (repo publiczne)
+# Prawdziwe ciasteczka NIGDY nie trafiają do gita.
+
+# katalog lokalny na ciasteczka
+cookies/*
+!cookies/README.md
+
+# typowe nazwy plików z ciasteczkami / sesją
+*.cookie
+*.cookies
+cookies*.txt
+cookies*.json
+suno_cookie*
+.env
+.env.*
+!.env.example
