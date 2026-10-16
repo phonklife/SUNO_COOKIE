@@ -36,7 +36,7 @@ jobs:
           deno-version: v2.x
 
       - name: Check SunoAPI Edge Function
-        run: deno check supabase/functions/suno-upload-extend/index.ts supabase/functions/suno-upload-extend/index_test.ts
+        run: deno check --config supabase/functions/suno-upload-extend/deno.json supabase/functions/suno-upload-extend/index.ts supabase/functions/suno-upload-extend/index_test.ts
 
       - name: Test SunoAPI request validation
-        run: deno test supabase/functions/suno-upload-extend/index_test.ts
+        run: deno test --config supabase/functions/suno-upload-extend/deno.json supabase/functions/suno-upload-extend/index_test.ts
