@@ -1,43 +1,46 @@
-# SUNO_COOKIE // R3 ERA — THE EMPTY STATE MANIFESTO
+# CLAUDE.md
 
-> *„Repo stoi puste jak betonowy hangar przed pierwszym bassem.”*
+This file provides guidance to Claude Code when working with code in this repository.
 
----
+## Project Overview
 
-## I. UTWÓR / POEZJA ARCHITEKTONICZNA: STAN ZERO
+`SUNO_COOKIE` is a small Node.js/TypeScript toolkit for validating a user-supplied Suno session cookie without exposing the secret. It is intentionally local-first and does not scrape browser cookie stores or capture other users' sessions.
 
-(Intro: Niskie mruczenie generatora, szum analogowej taśmy, absolutna cisza wirtualnego hangaru)
+## Project Structure
 
-Beton i cisza, pustka w sieci,
-Żaden algorytm jeszcze nie świeci.
-Zero kodu, zero struktur, złudzeń mur,
-W kadrze tylko cień, w hangarze tylko chłód.
+```text
+src/config.ts       environment validation
+src/redact.ts       secret redaction helper
+src/index.ts        CLI entry point
+test/redact.test.ts tests for config and redaction
+README.md           usage and security notes
+.env.example        placeholder environment configuration
+```
 
-Czekamy na ruch, na twardy plik,
-Zanim zakwitnie pierwszy kick.
-Żadne domysły, żadna fikcja,
-Tu twarda rządzi jurysdykcja.
+## Development Commands
 
-Reguła R3, żelazny mur:
-Agent nie zgaduje. Nie buduje bzdur.
-Czeka na surowiec, na prawdy krzyk,
-Jak subwoofer na pierwszy, potężny dyk.
+```bash
+npm install
+npm run check
+npm run build
+npm test
+npm start
+```
 
----
+Node.js 20+ is required.
 
-## II. SPECYFIKACJA TECHNICZNA I OPERACYJNA (DOCUMENT VALUE)
+## Security Rules
 
-### 1. Parametry Projektowe
-- **Projekt:** `SUNO_COOKIE`
-- **Era:** `R3` (Pre-Phase / Empty State)
-- **Środowisko:** Czysty rejestr, brak wstępnych zależności, baza zerowa.
+- Never commit a real `SUNO_COOKIE` value.
+- Never print, log, snapshot, or include the full cookie in errors.
+- Keep `.env` and other local secret files ignored by Git.
+- Do not add automatic browser-cookie extraction or credential/session harvesting.
+- Any future HTTP adapter must use only a session explicitly supplied by the account owner and should use timeouts, narrow operations, and redacted logging.
 
-### 2. Żelazna Zasada R3 (Protocol R3)
-- **Brak Spekulacji:** Agent systemowy nie generuje kodu "na zapas" ani nie tworzy domyślnych struktur bez wyraźnego, fizycznego pliku źródłowego od użytkownika.
-- **Stan Hangaru (Empty State):** Repozytorium traktowane jest jako poligon czystej intencji. Każdy plik musi zostać dostarczony realnie.
-- **Przepływ (Flow):** `WAIT FOR REAL FILES` — zatrzymanie autonomicznej generacji do momentu dostarczenia wsadu właściwego.
+## Code Conventions
 
-### 3. Instrukcja Inicjalizacji
-1. Nie dopisuj kodu spekulatywnego.
-2. Czekaj na wgranie plików bazy lub struktury audio/kodowej.
-3. Trzymaj linię fabrykacji w stanie ciszy roboczej.
+- TypeScript strict mode is enabled.
+- Use ESM imports compatible with `NodeNext`.
+- Prefer small pure helpers that are easy to test.
+- Add tests for validation, redaction, and any future request-building logic.
+- Keep runtime dependencies minimal unless a dependency clearly improves correctness or security.
